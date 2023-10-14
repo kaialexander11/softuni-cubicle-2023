@@ -1,0 +1,18 @@
+{
+  "name": "softuni-cubicle-2023",
+  "version": "1.0.0",
+  "description": "Course Project Workshop",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
