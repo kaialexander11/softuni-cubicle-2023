@@ -6,6 +6,7 @@ const path = require('path');
 
 const expressConfig = require('./config/expressConfig');
 const handlebarsConfig = require('./config/handlebarsConfig');
+const homeController = require('./controllers/homeController');
 
 const app = express();
 
@@ -20,12 +21,9 @@ expressConfig(app);
 
 //Handlebars:
 handlebarsConfig(app);
+app.use(homeController);
 
-
-// ROUTES:
-app.get('/', (req, res) => {
-    //res.send('Hello from Express!'); => valid and working!
-    res.render('index');
-});
+//HOME ROUTE
+app.get('/', homeController.getHome);
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}... `));
