@@ -6,8 +6,8 @@ const express = require('express');
 
 const expressConfig = require('./config/expressConfig.js');
 const handlebarsConfig = require('./config/handlebarsConfig.js');
-const homeController = require('./controllers/homeController.js');
-const cubeController = require('./controllers/cubeController.js');
+const routes = require('./routes');
+
 
 const app = express();
 
@@ -22,12 +22,7 @@ expressConfig(app);
 
 //Handlebars:
 handlebarsConfig(app);
-app.use(homeController);
-app.use('/cubes', cubeController);
-app.get('*', (req, res) => {
-    //res.render(404);
-    res.redirect('/404');
-});
+app.use(routes);
 
 //HOME ROUTE
 //app.get('/', homeController.getHome);
