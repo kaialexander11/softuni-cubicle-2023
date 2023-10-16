@@ -24,6 +24,10 @@ expressConfig(app);
 handlebarsConfig(app);
 app.use(homeController);
 app.use('/cubes', cubeController);
+app.get('*', (req, res) => {
+    //res.render(404);
+    res.redirect('/404');
+});
 
 //HOME ROUTE
 //app.get('/', homeController.getHome);
