@@ -2,11 +2,12 @@
 
 const express = require('express');
 //const handlebars = require('express-handlebars');
-const path = require('path');
+//const path = require('path');
 
-const expressConfig = require('./config/expressConfig');
-const handlebarsConfig = require('./config/handlebarsConfig');
-const homeController = require('./controllers/homeController');
+const expressConfig = require('./config/expressConfig.js');
+const handlebarsConfig = require('./config/handlebarsConfig.js');
+const homeController = require('./controllers/homeController.js');
+const cubeController = require('./controllers/cubeController.js');
 
 const app = express();
 
@@ -22,8 +23,9 @@ expressConfig(app);
 //Handlebars:
 handlebarsConfig(app);
 app.use(homeController);
+app.use('/cubes', cubeController);
 
 //HOME ROUTE
-app.get('/', homeController.getHome);
+//app.get('/', homeController.getHome);
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}... `));
