@@ -37,22 +37,16 @@ exports.getAll = async (search, from, to) => {
 
     //TODO: use mongoose to filter in the DB
     if (search) {
-
         result = result.filter(cube => cube.name.toLowerCase().includes(search.toLowerCase()));
-
     }
 
 
     if (from) {
-
         result = result.filter(cube => cube.difficultyLevel >= Number(from));
-
     }
 
     if (to) {
-
         result = result.filter(cube => cube.difficultyLevel <= Number(to));
-
     }
 
     return result;
@@ -63,13 +57,13 @@ exports.getAll = async (search, from, to) => {
 exports.getOne = (cubeId) => Cube.findById(cubeId);
 //exports.getOneLean = (cubeId) => this.getOne(cubeId).lean(); => VALID!
 
+exports.getOneWithAccessories = (cubeId) => this.getOne(cubeId).populate('accessories');
+
 exports.create = (cubeData) => {
 
     const cube = new Cube(cubeData);
-
-    //await cube.save();
     
-    return cube;
+    return cube.save();
 
 };
 
