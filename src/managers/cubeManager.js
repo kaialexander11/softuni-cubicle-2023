@@ -1,4 +1,4 @@
-const Cube = require('../models/Cube.js');
+const Cube = require('../models/Cube');
 
 //The teacher deleted all this code.
 //const uniqid = require('uniqid');
@@ -37,16 +37,22 @@ exports.getAll = async (search, from, to) => {
 
     //TODO: use mongoose to filter in the DB
     if (search) {
+
         result = result.filter(cube => cube.name.toLowerCase().includes(search.toLowerCase()));
+
     }
 
 
     if (from) {
+
         result = result.filter(cube => cube.difficultyLevel >= Number(from));
+
     }
 
     if (to) {
+
         result = result.filter(cube => cube.difficultyLevel <= Number(to));
+
     }
 
     return result;
@@ -57,12 +63,21 @@ exports.getAll = async (search, from, to) => {
 exports.getOne = (cubeId) => Cube.findById(cubeId);
 //exports.getOneLean = (cubeId) => this.getOne(cubeId).lean(); => VALID!
 
-exports.create = async (cubeData) => {
+exports.create = (cubeData) => {
 
     const cube = new Cube(cubeData);
 
-    await cube.save();
+    //await cube.save();
     
     return cube;
 
+};
+
+exports.attachAccessory = async (cubeId, accessoryId) => {
+    //return Cube.findByIdAndUpdate(cubeId, { $push: {accessories: accessoryId} });
+
+    const cube = await Cube.findById(cubeId);
+    cube.accessories.push(accessoryId);
+
+    return cube.save();
 };
