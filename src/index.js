@@ -15,12 +15,16 @@ handlebarsConfig(app);
 dbConnect()
     .then(() => console.log('DB Connected successfully!'))
     .catch(err => {
-        console.log('DB error: ', err);
+        console.log('DB error: ', err.message);
     });
 
 app.use(routes);
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}... `));
 
+
+
+
+//This is a code we used at some point, but it is no longer useful:
 
 //console.log('Hello world!');
 //const handlebars = require('express-handlebars');
