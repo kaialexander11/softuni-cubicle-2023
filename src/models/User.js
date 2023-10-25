@@ -18,6 +18,8 @@ const userSchema = new mongoose.Schema({
 
 });
 
+//TODO: validate if user exists
+
 userSchema.virtual('repeatPassword')
     .set(function(value) {
         if (value !== this.password) {
@@ -37,7 +39,10 @@ module.exports = User;
 
 
 
+
+
 // This stays here just for an example:
+
 // userSchema.pre('validate', function() {
 //     if(this.repeatPassword !== this.password) {
 //         throw new mongoose.MongooseError('Password missmatch!');
