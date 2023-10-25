@@ -5,6 +5,11 @@ const accessoryManager = require('../managers/accessoryManager');
 
 // Path /cubes/create
 router.get('/create', (req, res) => {
+
+    console.log(req.user);
+
+    //const token = req.cookies['auth'];
+
     //console.log(cubeManager.getAll());
     res.render('create');
 });
