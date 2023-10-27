@@ -9,27 +9,22 @@ const userSchema = new mongoose.Schema({
         required: [true, 'Username is required!'],
         minLength: [5, 'Password is too short!'],
         match: [/^[A-Za-z0-9]+$/, 'Username must be alphanumeric!'],
-        unique: [true, 'Username already exists'],
+        unique: {
+            value: true,
+            message: 'Username already exists',
+        },
 
     },
-
     password: {
         type: String,
         required: [true, 'Password is required!'],
         validate: {
-
-            // VALID EXAMPLE:
-            // validator: function(value) {
-            //     return this.repeatPassword === value;
-            // },
-            // message: `Password missmatch!`
-
-            validator: function (value) {
+            validator: function(value) {
                 return /^[A-Za-z0-9]+$/.test(value);
             },
             message: `Invalid password characters!`
+            
         },
-
         minLength: 8,
     },
     info: {
@@ -39,7 +34,11 @@ const userSchema = new mongoose.Schema({
     },
 });
 
-//TODO: validate if user exists
+userSchema.path('username').validate(function(value) {
+    mongoose.model('User').findOne({username: value});
+
+    return !!user;
+}, 'Username already exists!');
 
 userSchema.virtual('repeatPassword')
     .set(function(value) {
@@ -70,3 +69,11 @@ module.exports = User;
 //         throw new mongoose.MongooseError('Password missmatch!');
 //     }
 // });
+
+
+
+// VALID EXAMPLE:
+// validator: function(value) {
+//     return this.repeatPassword === value;
+// },
+// message: `Password missmatch!`
